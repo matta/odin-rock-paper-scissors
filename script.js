@@ -46,15 +46,52 @@ function gameVerdict(a, b) {
     console.error(`gameVerdict: Invalid input ${a} ${b}`);
 }
 
+function describeResult(playerChoice, computerChoice, verdict) {
+    switch (verdict) {
+        case 0:
+            return 'Tie! Both players chose ' + playerChoice;
+        case 1:
+            return 'You win! ' + playerChoice + ' beats ' + computerChoice;
+        case -1:
+            return 'You lose! ' + playerChoice + ' loses to ' + computerChoice;
+    }
+}
+
 function playRound(playerChoice, computerChoice) {
     const p = playerChoice.toLowerCase();
     const c = computerChoice.toLowerCase();
-    switch (gameVerdict(p, c)) {
-        case 0:
-            return 'Tie! Both players chose ' + p;
-        case 1:
-            return 'You win! ' + p + ' beats ' + c;
-        case -1:
-            return 'You lose! ' + p + ' loses to ' + c;
+    return gameVerdict(p, c);
+}
+
+function game() {
+    const stats = {
+        wins: 0,
+        losses: 0,
+        ties: 0,
+    };
+    for (let i = 0; i < 5; i++) {
+        const playerChoice = prompt('Choose rock, paper, or scissors.');
+        const computerChoice = getComputerChoice();
+        const verdict = playRound(playerChoice, computerChoice);
+        console.log(describeResult(playerChoice, computerChoice, verdict));
+        switch (verdict) {
+            case 0:
+                stats.ties += 1;
+                break;
+            case 1:
+                stats.wins += 1;
+                break;
+            case -1:
+                stats.losses += 1;
+                break;
+        }
+        console.table(stats);
+    }
+    if (stats.wins > stats.losses) {
+        console.log('You won the game!');
+    } else if (stats.wins < stats.losses) {
+        console.log('You lost the game!');
+    } else {
+        console.log('You tied the game!');
     }
 }
