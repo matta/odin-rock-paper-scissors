@@ -6,6 +6,7 @@
         });
     });
 }
+const results = document.querySelector('#results');
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -73,7 +74,11 @@ function playRound(playerChoice, computerChoice) {
 function onPlayClick(playerChoice) {
     const computerChoice = getComputerChoice();
     const verdict = playRound(playerChoice, computerChoice);
-    console.log(describeResult(playerChoice, computerChoice, verdict));
+    showResult(describeResult(playerChoice, computerChoice, verdict));
+}
+
+function showResult(text) {
+    results.innerText += text + '\n';
 }
 
 function game() {
@@ -86,7 +91,7 @@ function game() {
         const playerChoice = prompt('Choose rock, paper, or scissors.');
         const computerChoice = getComputerChoice();
         const verdict = playRound(playerChoice, computerChoice);
-        console.log(describeResult(playerChoice, computerChoice, verdict));
+        showResult(describeResult(playerChoice, computerChoice, verdict));
         switch (verdict) {
             case 0:
                 stats.ties += 1;
