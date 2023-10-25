@@ -1,4 +1,11 @@
-console.log("script.js loaded");
+{
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            onPlayClick(button.id);
+        });
+    });
+}
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
