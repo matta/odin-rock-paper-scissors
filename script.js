@@ -63,6 +63,12 @@ function playRound(playerChoice, computerChoice) {
     return gameVerdict(p, c);
 }
 
+function onPlayClick(playerChoice) {
+    const computerChoice = getComputerChoice();
+    const verdict = playRound(playerChoice, computerChoice);
+    console.log(describeResult(playerChoice, computerChoice, verdict));
+}
+
 function game() {
     const stats = {
         wins: 0,
