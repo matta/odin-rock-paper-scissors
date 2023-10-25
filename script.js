@@ -7,6 +7,10 @@
     });
 }
 const results = document.querySelector('#results');
+const score = {
+    wins: document.querySelector('#wins'),
+    losses: document.querySelector('#losses'),
+};
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -75,6 +79,20 @@ function onPlayClick(playerChoice) {
     const computerChoice = getComputerChoice();
     const verdict = playRound(playerChoice, computerChoice);
     showResult(describeResult(playerChoice, computerChoice, verdict));
+    switch (verdict) {
+        case 1:
+            score.wins.innerText++;
+            break;
+        case -1:
+            score.losses.innerText++;
+            break;
+    }
+    if (score.wins.innerText >= 5) {
+        showResult('You won the game!');
+    }
+    if (score.losses.innerText >= 5) {
+        showResult('You lose the game!');
+    }
 }
 
 function showResult(text) {
